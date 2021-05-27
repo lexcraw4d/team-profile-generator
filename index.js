@@ -20,7 +20,7 @@ const initializePrompt = () => {
 			if (response.employeeType != 'None to add, my team is complete!') {
 				initializeQuestions(response.employeeType);
 			} else {
-				//write html file here
+				
 			}
 		});
 };
@@ -66,7 +66,9 @@ let promptEngineer = (basicInfo, role) => {
 		})
 		.then(({ github }) => {
 			let engineer = new Engineer(basicInfo.name, basicInfo.id, basicInfo.email, github);
-			console.table(engineer);
+			employeeArr.push(engineer);
+			initializePrompt();
+			// console.table(engineer);
 		});
 };
 let promptManager = (basicInfo, role) => {
@@ -78,7 +80,9 @@ let promptManager = (basicInfo, role) => {
 		})
 		.then(({ office }) => {
 			let manager = new Manager(basicInfo.name, basicInfo.id, basicInfo.email, office);
-			console.table(manager);
+			// console.table(manager);
+			employeeArr.push(manager);
+			initializePrompt();
 		});
 };
 let promptIntern = (basicInfo, role) => {
@@ -90,7 +94,9 @@ let promptIntern = (basicInfo, role) => {
 		})
 		.then(({ school }) => {
 			let intern = new Intern(basicInfo.name, basicInfo.id, basicInfo.email, school);
-			console.table(intern);
+			// console.table(intern);
+			employeeArr.push(intern);
+			initializePrompt();
 		});
 };
 //get prompts for roles
