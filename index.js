@@ -3,8 +3,10 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 // let gitHub = github();
+let employeeArr = [];
+
 const initializePrompt = () => {
-	inquirer
+	return inquirer
 		.prompt([
 			{
 				type: 'checkbox',
@@ -16,7 +18,7 @@ const initializePrompt = () => {
 		.then((response) => {
 			if (response.employeeType != 'None to add, my team is complete!') {
 				initializeQuestions(response.employeeType);
-				console.log(response);
+				// console.log(response);
 			} else {
 				//write html file here
 			}
@@ -24,7 +26,8 @@ const initializePrompt = () => {
 };
 const initializeQuestions = (employeeRole) => {
 	console.log('<------ Adding new employee ------>');
-	inquirer
+
+	return inquirer
 		.prompt([
 			{
 				type: 'text',
@@ -44,27 +47,38 @@ const initializeQuestions = (employeeRole) => {
 			},
 		])
 		.then((allInfo) => {
-			if (employeeRole === 'Engineer') {
-				console.log('Role to be added: Engineer');
-				//create Engineer inquirer prompt
-				//use allinfo.name allinfo.id etc for initial info
-				//inquire prompt additional question for param
-				// and add here class fx e.g. Engineer(passInfo)
-			} else if (employeeRole === 'Manager') {
-				console.log('Role to be added: Manager');
-				//mgr prompt inquirer variable here
-				// and add here class fx e.g. Manage(passInfo)
-			} else if (employeeRole == 'Intern') {
-				console.log('Role to be added: Intern');
-				//intern prompt inquirer variable here
-				// and add here class fx e.g. intern(passInfo)
-			}
-		});
-};
+			if (employeeRole == 'Engineer') {
+			return inquirer
+					.prompt({
+						type: 'text',
+						name: 'github',
+						message: 'What is your Github username?',
+					})
+				}
+				else if (employeeRole == 'Manager') {
+					return inquirer
+					.prompt({
+						type: 'text',
+						name: 'office',
+						message: 'What is your office number?',
+					})
+				} 
+				else if (employeeRole == 'Intern') {
+					return inquirer
+					.prompt({
+						type: 'text',
+						name: 'school',
+						message: 'What school do you attend?',
+					})
+				}
+			});
+		
+		};
+
+
 
 //get prompts for roles
-//add information and pass as params to class
+//add information and pass as params to class using allInfo
 //.then after else if
-//push as an obj to [empty arr] var after fx class
-
+//push as an obj to [empty arr] var after fx
 initializePrompt();
