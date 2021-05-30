@@ -3,9 +3,9 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
+const fs = require('fs');
 // let gitHub = github();
 let employeeArr = [];
-
 const initializePrompt = () => {
 	return inquirer
 		.prompt([
@@ -20,7 +20,10 @@ const initializePrompt = () => {
 			if (response.employeeType != 'None to add, my team is complete!') {
 				initializeQuestions(response.employeeType);
 			} else {
-				
+				fs.writeFileSync('./dist/team.html', starterHtml(employeeArr), (err) => {
+					if (err) throw err;
+					console.log('Successfully created team HTML file!');
+				});
 			}
 		});
 };
@@ -99,6 +102,114 @@ let promptIntern = (basicInfo, role) => {
 			initializePrompt();
 		});
 };
+function createHtml() {
+	const html = [];
+
+	function mngrHtml(employee) {
+		return `    
+		<!-- Manager -->
+		<div class="col s4 m4 l4 .center-align grey lighten-1">
+		<div class="card center-align">
+		<div class="blue lighten-2 white-text">
+	   <div> <h5>${employee.name}</h5></div>
+	   <div><h6>Manager</h6></div>
+	   </div>
+	   <div>Employee ID: ${employee.id}
+	   <div>Phone: 8643631977</div>
+	   <div>Email: <a href="mailto:${employee.email}">${employee.email}</a></div>
+	   <div>Office number: ${employee.officeNumber}</div>
+	  
+	   </div>
+	</div>
+	</div>	
+		`;
+	}
+
+	function engrHtml(employee) {
+		return `<!-- Engineer -->
+		
+			<div class="col s4 m4 l4 .center-align grey lighten-1">
+				<div class="card center-align">
+				<div class="blue lighten-2 white-text">
+			   <div> <h5>${employee.name}</h5></div>
+			   <div><h6>Engineer</h6></div>
+			   </div>
+			   <div>Employee ID: ${employee.id}
+			   <div>Phone: 8643631977</div>
+			   <div>Email: <a href="mailto:${employee.email}">${employee.email}</a></div>
+			   <div>Github: <a href="https://github.com/${employee.github}">${employee.github}</a></div>
+			   </div>
+			</div>
+			</div>
+			</div>
+		`;
+	}
+
+	function intHtml(employee) {
+		return `<!-- Intern -->
+		<div class="col s4 m4 l4 .center-align grey lighten-1">
+		<div class="card center-align">
+		<div class="blue lighten-2 white-text">
+	   <div> <h5>${employee.name}</h5></div>
+	   <div><h6>Intern</h6></div>
+	   </div>
+	   <div>Employee ID: ${employee.id}
+	   <div>Phone: 8643631977</div>
+	   <div>Email: <a href="mailto:${employee.email}">${employee.email}</a></div>
+	   <div>School: ${employee.school}</div>
+	   </div>
+	</div>
+	</div>`
+	}
+
+	for (i = 0; i < employeeArr.length; i++) {
+		let teamMember = employeeArr[i];
+		console.log(teamMember)
+		if (teamMember.getRole() === 'Manager') {
+			html.push(mngrHtml(teamMember));
+		} else if (teamMember.getRole() === 'Engineer') {
+			html.push(engrHtml(teamMember));
+		} else {
+			html.push(intHtml(teamMember));
+		}
+	}
+	return html.join('');
+}
+
+function starterHtml() {
+	return `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <title>Team Profile</title>
+</head>
+
+<body>
+    <div class=".center-align"><h2 class=".center-align">Team Generator</h2></div>
+	
+			<div class="row">
+				<!-- START OF TEAM MEMBER CARDS-->
+	
+				${createHtml()}
+				
+				<!-- END OF TEAM MEMBER CARDS-->
+		
+	</body>
+	</html>`;
+}
+
 //get prompts for roles
 //add information and pass as params to class using allInfo
 //.then after else if
