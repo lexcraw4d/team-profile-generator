@@ -159,12 +159,12 @@ function createHtml() {
 	   <div>School: ${employee.school}</div>
 	   </div>
 	</div>
-	</div>`
+	</div>`;
 	}
 
 	for (i = 0; i < employeeArr.length; i++) {
 		let teamMember = employeeArr[i];
-		console.log(teamMember)
+		// console.log(teamMember.getRole());
 		if (teamMember.getRole() === 'Manager') {
 			html.push(mngrHtml(teamMember));
 		} else if (teamMember.getRole() === 'Engineer') {
