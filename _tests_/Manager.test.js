@@ -1,9 +1,9 @@
-const Manager = require('../lib/Intern');
+const Manager = require('../lib/Manager');
 
 // jest.mock('../lib/manager')
 
 test('Get manager information based off inquirer prompts', () =>{
-    const manager = new Manager('Lexie', 4325,'lex@gmail.com', 8643631977)
+    const manager = new Manager('Lexie', 4325,'lex@gmail.com', 3631977)
 
     expect(manager.name).toEqual(expect.any(String));
     expect(manager.id).toEqual(expect.any(Number));

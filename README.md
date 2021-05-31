@@ -34,6 +34,8 @@ Node.js was used in combination with VSC. You can dowload Node.js [here](https:/
 ![](Assets/Photos/Inquirer.JPG)
 [npm](https://www.npmjs.com/package/inquirer) was used in combination with [Inquirer ](https://www.npmjs.com/package/inquirer) to prompt the user via CLI. Please click the referenced information for documentation on npm and Inquirer.
 
+### Jest
+For this application, Jest was used to verify the functionality of the code. A short video of the passing tests can be found [here](https://drive.google.com/file/d/1hWgtrsBL-oNP8NWuZI9vL4JIUEOgzVQU/view?usp=sharing).
 #### GitHub/Git
 
 In order to make effective changes to the website both [Git](https://gitforwindows.org/) and [GitHub](https://github.com/) were used in synchronization to push commits of the latest updated version.
