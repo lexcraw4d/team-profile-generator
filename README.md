@@ -10,8 +10,9 @@
 
 # About
 The Team Profile Generator was created for the user to quickly be able to create a  neat and clean html file, which includes information about the user's work team based on their responses using the command line interface(CLI). The Team Profile Generator was created using the command line application in [Visual Studio Code](https://code.visualstudio.com/) via [Node.js](https://nodejs.org/en/) given a set of prompts through [Inquirer's](https://www.npmjs.com/package/inquirer) [Node Package Manager (npm)](https://www.npmjs.com/). The user is prompted with detailed role-specific-questions that provide information that later will be used to create a final html file compiled of all employee roles that were entered along with their information.
-Please visit [this video](https://drive.google.com/file/d/1CzPWLf5dscZxKIJJqvdP-yWfrYn6Cyl9/view?usp=sharing) for a live demo, since all of the generator is made via the command line.
-
+Please visit [this video](https://drive.google.com/file/d/1YBGQGzkXizTpFmDODRhGQycl0UWuVa2X/view?usp=sharing) for a live demo, since all of the generator is made via the command line.
+![](Assets/Photos/prompt.JPG)
+![Final Profile ](Assets/Photos/teamCrawford.JPG)
 # Installation
 To install please visit [my repository](https://github.com/lexcraw4d/team-profile-generator) and look at the uploaded files via GitHub Deployment. You may also fork my repository and download both [Node.js](https://nodejs.org/en/) and [Inquirer](https://www.npmjs.com/package/inquirer). Additionally, you will need [Visual Studio Code](https://code.visualstudio.com/).The details of how to implement these are provided in the [Usage](#Usage) section below.
 # Usage

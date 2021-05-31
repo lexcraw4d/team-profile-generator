@@ -3,6 +3,7 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
+
 const fs = require('fs');
 // let gitHub = github();
 let employeeArr = [];
@@ -47,6 +48,18 @@ let initializeQuestions = (employeeRole) => {
 				type: 'text',
 				name: 'email',
 				message: 'What is your email address?',
+				default: () => {},
+				validate: function (email) {
+					valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+
+					if (valid) {
+						//   console.log("nice email");
+						return true;
+					} else {
+						console.log('Please enter a valid email');
+						return false;
+					}
+				},
 			},
 		])
 		.then((allInfo) => {
@@ -66,6 +79,7 @@ let promptEngineer = (basicInfo, role) => {
 			type: 'text',
 			name: 'github',
 			message: 'What is your Github username?',
+		
 		})
 		.then(({ github }) => {
 			let engineer = new Engineer(basicInfo.name, basicInfo.id, basicInfo.email, github);
@@ -80,6 +94,11 @@ let promptManager = (basicInfo, role) => {
 			type: 'text',
 			name: 'office',
 			message: 'What is your office number?',
+			// validate: function (phoneNumber){
+			// 	if (phoneNumber !=  Number){
+			// 		console.log('    Please enter a valid number.')
+			// 	}
+			// }
 		})
 		.then(({ office }) => {
 			let manager = new Manager(basicInfo.name, basicInfo.id, basicInfo.email, office);
@@ -94,6 +113,8 @@ let promptIntern = (basicInfo, role) => {
 			type: 'text',
 			name: 'school',
 			message: 'What school do you attend?',
+			
+		
 		})
 		.then(({ school }) => {
 			let intern = new Intern(basicInfo.name, basicInfo.id, basicInfo.email, school);
@@ -108,14 +129,13 @@ function createHtml() {
 	function mngrHtml(employee) {
 		return `    
 		<!-- Manager -->
-		<div class="col s4 m4 l4 .center-align grey lighten-1">
+		<div class="col s4 m4 l4 .center-align grey lighten-2">
 		<div class="card center-align">
-		<div class="blue lighten-2 white-text">
+		<div class="blue darken-2 white-text">
 	   <div> <h5>${employee.name}</h5></div>
-	   <div><h6>Manager</h6></div>
+	   <div><i class="material-icons">local_cafe</i><h6>Manager</h6></div>
 	   </div>
 	   <div>Employee ID: ${employee.id}
-	   <div>Phone: 8643631977</div>
 	   <div>Email: <a href="mailto:${employee.email}">${employee.email}</a></div>
 	   <div>Office number: ${employee.officeNumber}</div>
 	  
@@ -128,33 +148,31 @@ function createHtml() {
 	function engrHtml(employee) {
 		return `<!-- Engineer -->
 		
-			<div class="col s4 m4 l4 .center-align grey lighten-1">
+			<div class="col s4 m4 l4 .center-align grey lighten-2">
 				<div class="card center-align">
-				<div class="blue lighten-2 white-text">
+				<div class="blue darken-2 white-text">
 			   <div> <h5>${employee.name}</h5></div>
-			   <div><h6>Engineer</h6></div>
+			   <div><i class="material-icons">computer</i><h6>Engineer</h6></div>
 			   </div>
 			   <div>Employee ID: ${employee.id}
-			   <div>Phone: 8643631977</div>
 			   <div>Email: <a href="mailto:${employee.email}">${employee.email}</a></div>
 			   <div>Github: <a href="https://github.com/${employee.github}">${employee.github}</a></div>
 			   </div>
 			</div>
 			</div>
-			</div>
+		
 		`;
 	}
 
 	function intHtml(employee) {
 		return `<!-- Intern -->
-		<div class="col s4 m4 l4 .center-align grey lighten-1">
+		<div class="col s4 m4 l4 .center-align grey lighten-2">
 		<div class="card center-align">
-		<div class="blue lighten-2 white-text">
+		<div class="blue darken-2 white-text">
 	   <div> <h5>${employee.name}</h5></div>
-	   <div><h6>Intern</h6></div>
+	   <div><i class="material-icons">school</i><h6>Intern</h6></div>
 	   </div>
 	   <div>Employee ID: ${employee.id}
-	   <div>Phone: 8643631977</div>
 	   <div>Email: <a href="mailto:${employee.email}">${employee.email}</a></div>
 	   <div>School: ${employee.school}</div>
 	   </div>
@@ -197,7 +215,7 @@ function starterHtml() {
 </head>
 
 <body>
-    <div class=".center-align"><h2 class=".center-align">Team Generator</h2></div>
+    <div class=".center-align red lighten-4"><h2 style="text-align: center;" class="red lighten-4">Team Profile  Generator</h2></div>
 	
 			<div class="row">
 				<!-- START OF TEAM MEMBER CARDS-->
