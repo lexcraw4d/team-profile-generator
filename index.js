@@ -11,7 +11,7 @@ const initializePrompt = () => {
 	return inquirer
 		.prompt([
 			{
-				type: 'checkbox',
+				type: 'list',
 				name: 'employeeType',
 				message: 'Which team of employee would you like to add?',
 				choices: ['Engineer', 'Intern', 'Manager', 'None to add, my team is complete!'],
